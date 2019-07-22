@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <button class="scrape-btn">Scrape</button>
+
+            <button class="scrape-btn" type="submit">Scrape</button>
+
         </div>
     </div>
 
@@ -9,9 +11,28 @@
     <div class="row">
         <div class="col-md-12">
             <div class="scrape-div">
-                {{#each article}}
+                <ul>
+                {{#each Article}}
+                <li>
+                <p>{{this.title}}</p>
+                <p>{{this.link}}</p>
+                </li>
                 {{/each}}
+                </ul>
+                <br>
+                <div class="notes">
+                    </div>
             </div>
         </div>
     </div>
 </div>
+
+	<script type="text/javascript">
+
+    $.getJSON("/articles", function (article) {
+        for (var i = 0; i < article.length; i++) {
+        
+        $("article-div").append("<p data-id='" + article[i]._id + "'>" + article[i].title + "<br />" + article[i].link + "</p>");       
+    }
+ });
+	</script>
