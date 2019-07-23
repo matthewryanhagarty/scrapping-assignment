@@ -31,7 +31,7 @@
          <button class="cancel-note">Cancel</button>
     </form>
 </div>
-{{> header home=true saved=true}}
+{{> header home=false saved=true}}
 
 
  <hr/>
@@ -48,7 +48,7 @@
     {{#unless note}}
     <button class="add-btn" data-aid="{{this._id}}">Add A Note</button>
 
-     <hr/>
+
     {{else}}
 
     <div class="note-wrap" style="text-align: center" data-nid="{{this.note.title}}">
@@ -57,11 +57,14 @@
                 <button class="update-btn">Update</button>
     </div>
 
+     <hr/>
+
     {{/unless}}
 </div>
 {{/if}}
 {{/each}}
 
+     <hr/>
 
 
 

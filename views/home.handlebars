@@ -13,6 +13,11 @@
     .article-title{
         font-size: 30px;
     }
+
+    .active {
+        text-decoration: underline;
+    }
+
 </style>
 
 {{> header home=true saved=false}}
@@ -35,6 +40,7 @@
             <br>
             <button class="save-btn" data-aid="{{_id}}" style="margin-bottom: 5px;">Save</button>
              <hr/>
+        </div>
     {{/unless}}
 {{/each}}
 
