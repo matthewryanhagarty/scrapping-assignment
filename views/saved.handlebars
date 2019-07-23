@@ -2,7 +2,19 @@
     .hide {
         display: none;
     }
+    .row {
+        text-align: center;
+    }
 
+    .nav {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .article-title{
+        font-size: 30px;
+    }
    
 </style>
 
@@ -22,17 +34,21 @@
 {{> header home=true saved=true}}
 
 
+ <hr/>
 
 {{#each articles}}
 {{#if saved}}
 <div class="article-wrap">
-    <p>{{this.title}}</p>
+    <p class="article-title">{{this.title}}</p>
     <a href="{{this.link}}">Article Link</a>
+    <br>
+    <br>
     <button class="unsave-btn" data-aid="{{this._id}}">Unsave</button>
 
     {{#unless note}}
     <button class="add-btn" data-aid="{{this._id}}">Add A Note</button>
 
+     <hr/>
     {{else}}
 
     <div class="note-wrap" data-nid="{{this.note.title}}">
