@@ -1,0 +1,54 @@
+
+{{> header home=true saved=false}}
+
+<button class="scrape-btn">Scrape</button>
+
+ <hr/>
+{{#each articles}}
+    {{#unless saved}}
+        <div class="scrape-div">
+            <p>{{title}}</p>
+            <p href="">{{link}}</p>
+            <button class="save-btn" data-aid="{{_id}}">Save</button>
+             <hr/>
+        </div>
+    {{/unless}}
+{{/each}}
+
+
+{{#unless articles}}
+    <h3> No Articles to display yet</h3>
+{{/unless}}
+
+<script>
+
+    $(".scrape-btn").on("click", function () {
+        $.get("/scrape", function (response) {
+            console.log(response)
+            console.log("salad")
+            window.location.reload();
+        })
+    });
+
+    $(".save-btn").on("click", function () {
+        var articleId = $(this).data("aid");
+
+        var updateArticle = {
+            saved: true
+        }
+        var self = $(this)
+        $.ajax({
+            url: "/articles/" + articleId,
+            type: "PUT",
+            data: updateArticle,
+            success: function (result) {
+                if (result) {
+                var parentElm = self.parent(".scrape-div");
+                parentElm.remove();
+                }
+            }
+        })
+
+
+    })
+    </script>

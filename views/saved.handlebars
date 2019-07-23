@@ -1,0 +1,119 @@
+
+{{> header home=true saved=true}}
+
+<style>
+    .hide {
+        display: none;
+    }
+
+    .note-wrap {
+
+        width: 100vw;
+        position: fixed;
+        background: rgba(255,255,255,.8);
+        min-height: 100vh;
+
+        text-align: center;
+    }
+
+    .note-form {
+        background: white;
+        border-style: solid;
+        border-width: 1px;
+        padding: 20px;
+        margin: 0 auto;
+        width: 90%;
+    }
+</style>
+
+{{#each articles}}
+{{#if saved}}
+<div class="article-wrap">
+    <p>{{this.title}}</p>
+    <a href="{{this.link}}">Article Link</a>
+    <button class="unsave-btn" data-aid="{{this._id}}">Unsave</button>
+
+    {{#unless note}}
+    <button class="add-btn" data-aid="{{this._id}}">Add A Note</button>
+
+    {{else}}
+
+    <div class="note-wrap" data-nid="{{this.title}}">
+        <p class="note-title"> {{this.title}}<p>
+                <p class="note-body">{{this.body}}</p>
+                <button class="update-btn">Update</button>
+                <button class="cancel-btn">Cancel</button>
+    </div>
+
+    {{/unless}}
+</div>
+{{/if}}
+{{/each}}
+
+<div class="note-wrap hide" data-nid="" data-aid="">
+    <h4>Article Note</h4>
+    <form class="note-form">
+        <label for="title">Note Title</label>
+        <input type="text" id="title" required></input>
+        <br/>
+        <label for="body"> Note Body</label>
+        <textarea id="body" required></textarea>
+        <br/>
+        <button class="update-note">Save</button>
+    </form>
+</div>
+
+
+{{#unless articles}}
+<h3> No Articles to display yet</h3>
+{{/unless}}
+
+<script>
+
+    $(".unsave-btn").on("click", function () {
+        var articleId = $(this).data("aid");
+
+        var updateArticle = {
+            saved: false
+        }
+
+        var self = $(this)
+        $.ajax({
+            url: "/articles/" + articleId,
+            type: "PUT",
+            data: updateArticle,
+            success: function (result) {
+                var parentElm = self.parent(".article-wrap");
+                parentElm.remove();
+            }
+        })
+
+
+    })
+
+
+    $(".add-btn").on("click", function() {
+        var articleId = $(this).data("aid");
+        $(".note-wrap").attr("data-aid", articleId);
+        $(".note-wrap").slideDown("slow");
+    })
+
+
+    $(".cancel-btn").on("click", function(e) {
+        e.preventDefault();
+        $("#title, #body").val("");
+        $(".note-wrap").attr("data-aid", "");
+        $(".note-wrap").slideUp("slow");
+    })
+
+    $(".update-note").on("click", function(e) {
+
+        $(".note-form")[0].reportValidity();
+        e.preventDefault();
+        var note = {
+            title: $("#title").val().trim();
+            body: $("#body").val().trim();
+        }
+    })
+
+</script>
