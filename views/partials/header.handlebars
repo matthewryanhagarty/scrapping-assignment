@@ -1,13 +1,13 @@
 
-<style>
-    .active {
-        color: green;
-    }
-    </style>
 
 <header>
-    <nav>
-        <a href="/" class="{{#if home}} active {{/if}}">Home</a>
-        <a href="/saved" class="{{#if saved}} active {{/if}}">Saved Articles</a>
-    </nav>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+        <a href="/" class="{{#if home}} active {{/if}} nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+        <a href="/saved" class="{{#if saved}} active {{/if}} nav-link">Saved Articles</a>
+        </li>
+    </ul>
 </header>
+

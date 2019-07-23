@@ -71,6 +71,7 @@ app.get("/", function(req, res) {
 
   app.get("/saved", function(req, res) {
     db.Article.find({})
+    .populate("note")
       .then(function(dbArticle) {
         res.render("saved", {
           articles: dbArticle
@@ -93,19 +94,20 @@ app.get("/", function(req, res) {
 //       });
 //   });
 
-//   app.post("/articles/:id", function(req, res) {
-//     db.Note.create(req.body)
-//       .then(function(dbNote) {
+  app.post("/articles/:id/note", function(req, res) {
+   
+    db.Note.create(req.body)
+      .then(function(dbNote) {
     
-//         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
-//       })
-//       .then(function(dbArticle) {
-//         res.json(dbArticle);
-//       })
-//       .catch(function(err) {
-//         res.json(err);
-//       });
-//   });
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+      })
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
 
 
   app.put("/articles/:id", function(req, res) {
