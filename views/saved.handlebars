@@ -20,7 +20,7 @@
 
 <div class="note-wrap hide" data-nid="" data-aid="">
     <h4>Article Note</h4>
-    <form class="note-form">
+    <form class="note-form" style="text-align: center">
         <label for="title">Note Title</label>
         <input type="text" id="title" required></input>
         <br/>
@@ -38,7 +38,7 @@
 
 {{#each articles}}
 {{#if saved}}
-<div class="article-wrap">
+<div class="article-wrap" style="text-align: center">
     <p class="article-title">{{this.title}}</p>
     <a href="{{this.link}}">Article Link</a>
     <br>
@@ -51,7 +51,7 @@
      <hr/>
     {{else}}
 
-    <div class="note-wrap" data-nid="{{this.note.title}}">
+    <div class="note-wrap" style="text-align: center" data-nid="{{this.note.title}}">
         <p class="note-title"> {{this.note.title}}<p>
                 <p class="note-body">{{this.note.body}}</p>
                 <button class="update-btn">Update</button>
