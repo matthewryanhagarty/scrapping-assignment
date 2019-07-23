@@ -6,9 +6,17 @@ This is my submission for homework assignment number 14: Scrapping. We were task
 
 # Images
 
+##  Initial Page Load
+
 <img src="assets/images/1.png">
+
+## Saving the First Three Blogs
 <img src="assets/images/2.png">
+
+## Saved Blogs w/ Attached Notes
 <img src="assets/images/3.png">
+
+## Ability to Edit Saved Notes
 <img src="assets/images/4.png">
 
 # Tech I Used:
